@@ -14,33 +14,6 @@
 
 </head>
 <body>
-	<p id="result"></p>
-	<button>click</button>
-	
-	<script type="text/javascript">
-	
-		var arr = ['a','b','c'];
-	
-		$(document).ready(function() {
-			
-			$("button").on("click", function() {
-				$.ajax({
-					type : "post",
-					url : "/test2",
-					traditional : true,
-					data : {
-						'arr' : arr
-					},
-					dataType : 'text',
-					success : function(result) {
-						/* var arr2 = eval(result) */
-						var arr2 = JSON.parse(result);
-						$("#result").text(arr2[0])
-					}
-				});
-			});
-		});
-	
-	</script>
+
 </body>
 </html>

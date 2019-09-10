@@ -13,7 +13,9 @@ public interface MemberDAO {
 
 	public abstract MemberVO read(String id);
 
+	public abstract MemberVO updateui(String id);
+
 	public abstract void update(MemberVO vo);
 
-	public abstract void delete(String id);
+	public abstract void delete(MemberVO vo);
 }

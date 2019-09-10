@@ -3,8 +3,11 @@ package kr.co.domain;
 import java.io.Serializable;
 
 public class BoardVO implements Serializable{
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	private int bno;
 	private String title;
 	private String content;
@@ -16,6 +19,8 @@ public class BoardVO implements Serializable{
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	public BoardVO(int bno, String title, String content, String writer) {
 		super();
@@ -24,6 +29,8 @@ public class BoardVO implements Serializable{
 		this.content = content;
 		this.writer = writer;
 	}
+
+
 
 	public BoardVO(int bno, String title, String content, String writer, String regidate, String updatedate,
 			int viewcnt) {
@@ -96,9 +103,8 @@ public class BoardVO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+		
 	
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -121,8 +127,17 @@ public class BoardVO implements Serializable{
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + "]";
 	}
+
+
+
+	
+	
+	
+
 }

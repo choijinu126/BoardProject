@@ -10,128 +10,125 @@ public class PageTO {
 	private int startNum;
 	private int endNum;
 	private List<BoardVO> list;
-
 	
-	private int perLine;
-	private int bpn; /* begin page number; */
+	private int perLine = 10;
+	private int bpn;
 	private int spn;
-	private int lpg;
-	
 	
 	public PageTO() {
+		perPage = 5;
 		curPage = 1;
-		perPage = 10;
-		perLine = 10;
 	}
 	
+	
+
 	public PageTO(int curPage) {
 		super();
 		this.curPage = curPage;
-		perPage = 10;
-		perLine = 10;
+		perPage = 5;
 	}
 
-	public final int getAmount() {
+	public void change() {
+		totalPage = (amount-1)/perPage+1;
+		startNum = (curPage-1)*perPage+1;
+		endNum = curPage*perPage;
+		if(endNum>amount) endNum = amount;
+
+		bpn = ((curPage-1)/perLine)*perLine+1;
+		spn = ((curPage-1)/perLine+1)*perLine;
+		if(spn>totalPage) spn=totalPage;
+	}
+
+
+	public int getAmount() {
 		return amount;
 	}
-	
-	private void change() {
-		totalPage = (this.amount-1)/perPage +1;
-		startNum = (curPage - 1) * perPage + 1;
-		endNum = curPage * perPage;
-		endNum = endNum < this.amount ? endNum : this.amount;
-		
-		bpn = ((curPage-1)/perLine) * perLine + 1;
-		spn = ((curPage-1)/perLine + 1) * perLine;
-		spn = spn < totalPage?spn:totalPage;
-		lpg = ((totalPage)/perLine) * perLine;
-	}
-	
-	public final int getLpg() {
-		return lpg;
-	}
 
-	public final void setLpg(int lpg) {
-		this.lpg = lpg;
-	}
-
-	public final void setAmount(int amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 		change();
 	}
 
-	public final int getPerLine() {
-		return perLine;
-	}
-
-	public final void setPerLine(int perLine) {
-		this.perLine = perLine;
-		change();
-	}
-
-	public final int getBpn() {
-		return bpn;
-	}
-
-	public final void setBpn(int bpn) {
-		this.bpn = bpn;
-	}
-
-	public final int getSpn() {
-		return spn;
-	}
-
-	public final void setSpn(int spn) {
-		this.spn = spn;
-	}
-
-	public final int getCurPage() {
+	public int getCurPage() {
 		return curPage;
 	}
 
-	public final void setCurPage(int curPage) {
+	public void setCurPage(int curPage) {
 		this.curPage = curPage;
 		change();
 	}
 
-	public final int getPerPage() {
+	public int getPerPage() {
 		return perPage;
 	}
 
-	public final void setPerPage(int perPage) {
+	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 		change();
 	}
 
-	public final int getTotalPage() {
+	public int getTotalPage() {
 		return totalPage;
 	}
 
-	public final void setTotalPage(int totalPage) {
+	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
 
-	public final int getStartNum() {
+	public int getStartNum() {
 		return startNum;
 	}
 
-	public final void setStartNum(int startNum) {
+	public void setStartNum(int startNum) {
 		this.startNum = startNum;
 	}
 
-	public final int getEndNum() {
+	public int getEndNum() {
 		return endNum;
 	}
 
-	public final void setEndNum(int endNum) {
+	public void setEndNum(int endNum) {
 		this.endNum = endNum;
 	}
 
-	public final List<BoardVO> getList() {
+	public List<BoardVO> getList() {
 		return list;
 	}
 
-	public final void setList(List<BoardVO> list) {
+	public void setList(List<BoardVO> list) {
 		this.list = list;
-	}	
+	}
+
+	public int getPerLine() {
+		return perLine;
+	}
+
+	public void setPerLine(int perLine) {
+		this.perLine = perLine;
+		change();
+	}
+
+	public int getBpn() {
+		return bpn;
+	}
+
+	public void setBpn(int bpn) {
+		this.bpn = bpn;
+	}
+
+	public int getSpn() {
+		return spn;
+	}
+
+	public void setSpn(int spn) {
+		this.spn = spn;
+	}
+	
+	 
+	
+	
+	
+	
+	
+	
 }

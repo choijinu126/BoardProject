@@ -3,7 +3,6 @@ package kr.co.persistence;
 import java.util.List;
 
 import kr.co.domain.BoardVO;
-import kr.co.domain.MemberVO;
 import kr.co.domain.PageTO;
 
 public interface BoardDAO {
@@ -17,9 +16,12 @@ public interface BoardDAO {
 
 	public void del(int bno);
 
-	public int modify(BoardVO vo);
+	public BoardVO modifyui(int bno);
+
+	public void modify(BoardVO vo);
 
 	public int getAmount();
 
 	public List<BoardVO> list(PageTO to);
+
 }
