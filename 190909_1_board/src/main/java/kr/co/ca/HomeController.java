@@ -23,15 +23,44 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home() {
 		return "redirect:/board/list";
 	}
 	
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String home(Model model) {
-		model.addAttribute("msg", "hello world");
+	@RequestMapping(value = "/js1", method = RequestMethod.GET)
+	public String js1(Model model) {
 		
-		return "home";
+		return "js1";
+	}
+	
+	@RequestMapping(value = "/js2", method = RequestMethod.GET)
+	public String js2() {
+		
+		return "js2";
+	}
+	
+	@RequestMapping(value = "/js3", method = RequestMethod.GET)
+	public String js3() {
+		
+		return "js3";
+	}
+	
+	@RequestMapping(value = "/js4", method = RequestMethod.GET)
+	public String js4() {
+		
+		return "js4";
+	}
+	
+	@RequestMapping(value = "/js5", method = RequestMethod.GET)
+	public String js5() {
+		
+		return "js5";
+	}
+	
+	@RequestMapping(value = "/js6", method = RequestMethod.GET)
+	public String js6() {
+		
+		return "js6";
 	}
 	
 }

@@ -15,57 +15,70 @@ import kr.co.service.MemberService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	
+	
+	
 	@Autowired
 	private MemberService mservice;
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping("/delete")
+	public String delete(MemberVO vo) {
+		mservice.delete(vo);
+		return "redirect:/member/list";
+	}
+	
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(MemberVO vo) {
+		System.out.println(vo);
+		mservice.update(vo);
+		return "redirect:/member/read?id="+vo.getId();
+	}
+	
+	
+	@RequestMapping("/update")
+	public void updateUI(Model model, String id) {
+		MemberVO vo = mservice.updateui(id);
+		model.addAttribute("vo", vo);
+	}
+	
+	@RequestMapping("/read")
+	public void read(Model model, String id) {
+		MemberVO vo = mservice.read(id);
+		model.addAttribute("vo",vo);
+	}
+	
+	@RequestMapping("/list")
 	public void list(Model model) {
 		List<MemberVO> list = mservice.list();
 		model.addAttribute("list", list);
 	}
 	
-	@RequestMapping(value="/insert", method=RequestMethod.GET)
+	@RequestMapping("/insert")
 	public void insertUI() {
+		
 	}
-	
+
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(MemberVO vo) {
 		mservice.insert(vo);
+		
 		return "redirect:/member/list";
 	}
 	
-	@RequestMapping("/read")
-	public void read(String id, Model model) {
-		MemberVO vo = mservice.read(id);
-		model.addAttribute("vo", vo);
-	}
-	
-	@RequestMapping("/update")
-	public void updateUI(String id, Model model) {
-		MemberVO vo = mservice.updateUI(id);
-		model.addAttribute("vo", vo);
-	}
-	
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(MemberVO vo) {
-		mservice.update(vo);
-		return "redirect:/member/read?id=" + vo.getId();
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(String id) {
-		mservice.delete(id);
-		return "redirect:/member/list";
-	}
-	
+	@RequestMapping(value = "/idcheck", method=RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	@RequestMapping(value="/idcheck", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	public String idcheck(String id) {
 		MemberVO what = mservice.idcheck(id);
+		
 		if(what == null) {
-			return "사용 가능";
+			return "가능";
 		}else {
-			return "사용 불가";
+			return "붕가능";
 		}
+		
 	}
+	
+	
+
 }

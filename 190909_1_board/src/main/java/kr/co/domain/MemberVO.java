@@ -3,8 +3,11 @@ package kr.co.domain;
 import java.io.Serializable;
 
 public class MemberVO implements Serializable{
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	private String id;
 	private String name;
 	private int age;
@@ -77,4 +80,7 @@ public class MemberVO implements Serializable{
 	public String toString() {
 		return "MemberVO [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
+	
+	
+	
 }
