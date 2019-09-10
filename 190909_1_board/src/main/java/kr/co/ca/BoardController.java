@@ -44,8 +44,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/list")
-	public void list(PageTO to, Model model, int page) throws Exception{
-		to.setCurPage(page);
+	public void list(PageTO to, Model model) throws Exception{
 		PageTO dbto = bservice.list(to);
 		model.addAttribute("to", dbto);
 	}
