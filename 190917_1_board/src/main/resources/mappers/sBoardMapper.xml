@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.sboard">
+	<sql id="search">
+		<if test="searchType == 'writer'.toString()">
+			where lower(writer) like '%'||lower(#{keyword})||'%'
+		</if>
+		<if test="searchType == 'title'.toString()">
+			where lower(title) like '%'||lower(#{keyword})||'%'
+		</if>
+		<if test="searchType == 'content'.toString()">
+			where lower(content) like '%'||lower(#{keyword})||'%'
+		</if>
+	</sql>
+	
+	<select id="list" resultType="kr.co.domain.BoardVO">
+		<![CDATA[
+		select * from
+		(select rownum rnum, bno, title, writer, updatedate, viewcnt from 
+		(select * from tbl_board]]> <include refid="search"></include> <![CDATA[order by bno desc)) 
+		where rnum between #{startNum} and #{endNum}
+		]]>
+	</select>
+	
+	<select id="amount" resultType="Integer">
+		<![CDATA[select count(bno) from tbl_board]]> <include refid="search"></include>
+	</select>
+	
+</mapper>
