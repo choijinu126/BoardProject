@@ -50,7 +50,6 @@
 			$(".fileDrop").on("dragenter dragover", function(event){
 				event.preventDefault();
 			});
-			
 			$(".fileDrop").on("drop", function(event){
 				event.preventDefault();
 				

@@ -93,6 +93,7 @@ public class UploadFileUtils {
 
 	}
 
+	
 	public static boolean checkFormat(String formatName) {
 		List<String> list = new ArrayList<String>();
 		list.add("png");
