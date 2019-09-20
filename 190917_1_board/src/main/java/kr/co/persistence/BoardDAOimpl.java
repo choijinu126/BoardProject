@@ -1,6 +1,8 @@
 package kr.co.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -44,7 +46,6 @@ public class BoardDAOimpl implements BoardDAO{
 	@Override
 	public void del(int bno) {
 		session.delete(NS+".del", bno);
-		
 	}
 
 	@Override
@@ -61,13 +62,11 @@ public class BoardDAOimpl implements BoardDAO{
 
 	@Override
 	public int getAmount() {
-		// TODO Auto-generated method stub
 		return session.selectOne(NS+".amount");
 	}
 
 	@Override
 	public List<BoardVO> list(PageTO<BoardVO> to) {
-		// TODO Auto-generated method stub
 		return session.selectList(NS+".list", to);
 	}
 
@@ -81,5 +80,22 @@ public class BoardDAOimpl implements BoardDAO{
 		return session.selectOne(NS+".searchAmount", to);
 	}
 
+	@Override
+	public void addAttch(String filename, int bno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("filename",  filename);
+		map.put("bno", bno);
+		
+		session.insert(NS+".addAttch", map);
+	}
 
+	@Override
+	public List<String> getAttach(int bno) {
+		return session.selectList(NS+".getAttach", bno);
+	}
+
+	@Override
+	public void clearAttach(int bno) {
+		session.delete(NS+".clearAttach", bno);
+	}
 }

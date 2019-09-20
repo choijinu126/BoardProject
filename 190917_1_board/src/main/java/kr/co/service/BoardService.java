@@ -26,4 +26,6 @@ public interface BoardService {
 	public SPageTO searchList(SPageTO to);
 
 	public int searchAmount(SPageTO to);
+	
+	public List<String> getAttach(int bno);
 }

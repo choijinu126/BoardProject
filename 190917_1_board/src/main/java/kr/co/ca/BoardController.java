@@ -21,6 +21,12 @@ public class BoardController {
 	
 	@Inject
 	private BoardService bservice;
+	
+	@ResponseBody
+	@RequestMapping(value = "/getattach/{bno}")
+	public List<String> getAttach(@PathVariable("bno") int bno){
+		return bservice.getAttach(bno);
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public void createUI() {
@@ -29,8 +35,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(BoardVO vo) throws Exception {
-		int reNum = bservice.create(vo);
-		
+		bservice.create(vo);
 		return "redirect:/board/list";
 	}
 	
@@ -42,7 +47,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/read")
-	public void read(Model model, int bno, PageTO<BoardVO> to) throws Exception{
+	public void read(int bno, PageTO<BoardVO> to, Model model) throws Exception{
 		BoardVO vo = bservice.read(bno);
 		model.addAttribute("vo", vo);
 		model.addAttribute("to", to);

@@ -11,6 +11,7 @@ import kr.co.domain.BoardVO;
 import kr.co.domain.PageTO;
 import kr.co.domain.SPageTO;
 import kr.co.persistence.BoardDAO;
+import kr.co.persistence.ReplyDAO;
 
 @Service
 @Transactional
@@ -18,11 +19,21 @@ public class BoardServiceimpl implements BoardService{
 	
 	@Inject
 	private BoardDAO bdao;
-
+	
+	@Inject
+	private ReplyDAO rdao;
+	
 	@Override
 	public Integer create(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		return bdao.create(vo);
+		bdao.create(vo);
+		
+		if(vo.getFiles() != null) {
+			for(String filename : vo.getFiles()) {
+				bdao.addAttch(filename, vo.getBno());
+			}
+		}
+		
+		return vo.getBno();
 	}
 
 	@Override
@@ -34,13 +45,15 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public BoardVO read(int bno) {
 		bdao.increaseviewcnt(bno);
-		return bdao.read(bno);
+		BoardVO vo = bdao.read(bno);
+		return vo;
 	}
 
 	@Override
 	public void del(int bno) {
+		rdao.del(bno);
+		bdao.clearAttach(bno);
 		bdao.del(bno);
-		
 	}
 
 	@Override
@@ -57,7 +70,6 @@ public class BoardServiceimpl implements BoardService{
 
 	@Override
 	public PageTO<BoardVO> list(PageTO<BoardVO> to) {
-		System.out.println(":::::::::::::::::::::::::::::::::::::board service list start::::::::::::::::::::::::::::::::::::::::::::::");
 		int amount = bdao.getAmount();
 		to.setAmount(amount);
 		
@@ -86,5 +98,10 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public int searchAmount(SPageTO to) {
 		return bdao.searchAmount(to);
+	}
+
+	@Override
+	public List<String> getAttach(int bno) {
+		return bdao.getAttach(bno);
 	}
 }

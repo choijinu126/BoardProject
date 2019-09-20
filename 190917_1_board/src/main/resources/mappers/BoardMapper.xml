@@ -3,6 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.mapper.board">
+	<delete id="clearAttach">
+		delete from tbl_attach where bno = #{bno}
+	</delete>
+
+	<select id="getAttach" resultType="string">
+		select filename from tbl_attach where bno = #{bno}
+	</select>
+
+	<insert id="addAttch">
+		insert into tbl_attach(id, bno, filename) values (seq_attach.nextval, #{bno}, #{filename})
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select seq_attach.currval from dual
+		</selectKey>
+	</insert>
+
 	<insert id="create">
 		insert into tbl_board (bno, title, content, writer) values (seq_board.nextval, #{title}, #{content}, #{writer})
 		<selectKey keyProperty="bno" resultType="Integer" order="AFTER">

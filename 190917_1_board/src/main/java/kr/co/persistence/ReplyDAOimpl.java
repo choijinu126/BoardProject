@@ -48,6 +48,11 @@ public class ReplyDAOimpl implements ReplyDAO{
 		RowBounds rb = new RowBounds(to.getStartNum()-1, to.getPerPage());
 		return session.selectList(NS+".listPage", bno, rb);
 	}
+
+	@Override
+	public void del(int bno) {
+		session.delete(NS+".del", bno);
+	}
 	
 	
 

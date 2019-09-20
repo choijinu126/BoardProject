@@ -29,5 +29,9 @@ public interface BoardDAO {
 
 	public int searchAmount(SPageTO to);
 
-
+	public void addAttch(String filename, int bno);
+	
+	public List<String> getAttach(int bno);
+	
+	public void clearAttach(int bno);
 }

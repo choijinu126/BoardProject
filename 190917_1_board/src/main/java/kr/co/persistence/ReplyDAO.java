@@ -13,6 +13,8 @@ public interface ReplyDAO {
 	void update(ReplyVO vo);
 
 	void delete(int rno);
+	
+	void del(int bno);
 
 	int getAmount(int bno);
 

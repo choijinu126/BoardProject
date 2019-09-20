@@ -15,12 +15,19 @@ public class BoardVO implements Serializable{
 	private String regidate;
 	private String updatedate;
 	private int viewcnt;
+	private String[] files;
 	
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 
 	public BoardVO(int bno, String title, String content, String writer) {
 		super();
@@ -29,8 +36,6 @@ public class BoardVO implements Serializable{
 		this.content = content;
 		this.writer = writer;
 	}
-
-
 
 	public BoardVO(int bno, String title, String content, String writer, String regidate, String updatedate,
 			int viewcnt) {
