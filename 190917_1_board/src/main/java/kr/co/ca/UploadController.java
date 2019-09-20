@@ -33,6 +33,27 @@ public class UploadController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+	@RequestMapping(value = "/uploadajax", method = RequestMethod.POST, produces = "application/text;charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<String> uploadAjax(MultipartHttpServletRequest request) throws Exception {
+		MultipartFile file = request.getFile("file");
+		
+		String savedName = UploadFileUtils.uploadFile(uploadPath, file);
+		
+		return new ResponseEntity<String>(savedName, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/uploadajax", method = RequestMethod.GET)
+	public void uploadAjax() {
+		
+	}
+	
+	@RequestMapping("/displayfile")
+	@ResponseBody
+	public ResponseEntity<byte[]> displayfile(String filename){
+		return UploadFileUtils.displayfile(uploadPath, filename);
+	}
+	
 	@RequestMapping("/displayfile100")
 	@ResponseBody
 	public ResponseEntity<byte[]> displayfile100(String filename){
