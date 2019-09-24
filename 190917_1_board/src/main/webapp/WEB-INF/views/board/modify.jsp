@@ -138,7 +138,14 @@
 				});
 			});
 			
-			$(".modify").click(function() {
+			$(".modify").click(function(event) {
+				event.preventDefault();
+				var str = "";
+				$(".delbtn").each(function(index){
+					str += "<input name='files["+index+"]' value='"+$(this).attr("href")+"' type='hidden'/>";
+				});
+				
+				$form.append(str);
 				$form.attr("action", "/board/modify")
 				$form.attr("method", "post")
 				$form.submit();

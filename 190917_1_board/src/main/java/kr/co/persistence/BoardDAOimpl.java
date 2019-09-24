@@ -98,4 +98,12 @@ public class BoardDAOimpl implements BoardDAO{
 	public void clearAttach(int bno) {
 		session.delete(NS+".clearAttach", bno);
 	}
+
+	@Override
+	public void deleteAttach(String filename, int bno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("filename", filename);
+		map.put("bno", bno);
+		session.delete(NS+".deleteAttach", map);
+	}
 }

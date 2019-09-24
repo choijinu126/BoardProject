@@ -34,4 +34,6 @@ public interface BoardDAO {
 	public List<String> getAttach(int bno);
 	
 	public void clearAttach(int bno);
+
+	public void deleteAttach(String filename, int bno);
 }

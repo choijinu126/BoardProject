@@ -28,4 +28,6 @@ public interface BoardService {
 	public int searchAmount(SPageTO to);
 	
 	public List<String> getAttach(int bno);
+
+	public void deleteattach(String filename, int bno);
 }

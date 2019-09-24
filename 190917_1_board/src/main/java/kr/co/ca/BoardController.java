@@ -2,8 +2,10 @@ package kr.co.ca;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.domain.BoardVO;
 import kr.co.domain.PageTO;
 import kr.co.service.BoardService;
+import kr.co.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/board")
@@ -21,6 +24,16 @@ public class BoardController {
 	
 	@Inject
 	private BoardService bservice;
+	
+	@Resource(name = "uploadPath")
+	private String uploadPath;
+	
+	@ResponseBody
+	@RequestMapping(value = "/deletefile", method = RequestMethod.POST)
+	public ResponseEntity<String> deletefile(String filename, int bno){
+		bservice.deleteattach(filename, bno);
+		return UploadFileUtils.deletefile(uploadPath, filename);
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/getattach/{bno}")
@@ -71,7 +84,6 @@ public class BoardController {
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(BoardVO vo, PageTO<BoardVO> to) throws Exception{
-		
 		bservice.modify(vo);
 		
 		return "redirect:/board/read?bno="+vo.getBno()+"&curPage="+to.getCurPage()+"&perPage="+to.getPerPage();

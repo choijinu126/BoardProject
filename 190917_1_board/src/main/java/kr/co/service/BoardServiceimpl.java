@@ -65,7 +65,13 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public void modify(BoardVO vo) {
 		bdao.modify(vo);
+		bdao.clearAttach(vo.getBno());
 		
+		if(vo.getFiles() != null) {
+			for (String filename : vo.getFiles()) {
+				bdao.addAttch(filename, vo.getBno());
+			}
+		}
 	}
 
 	@Override
@@ -103,5 +109,10 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public List<String> getAttach(int bno) {
 		return bdao.getAttach(bno);
+	}
+
+	@Override
+	public void deleteattach(String filename, int bno) {
+		bdao.deleteAttach(filename, bno);
 	}
 }
