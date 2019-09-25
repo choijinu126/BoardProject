@@ -14,7 +14,7 @@
 
 </head>
 <body>
-
+${login.id} : ${login.name}<br/>
 	<div class="container">
 		<div class="row">
 			<div class="jumbotron">

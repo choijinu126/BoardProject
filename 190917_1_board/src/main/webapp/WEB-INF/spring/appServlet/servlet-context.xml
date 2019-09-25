@@ -34,4 +34,41 @@
 		<beans:constructor-arg value="/Users/choejin-u/Desktop/java/upload/test"></beans:constructor-arg>
 	</beans:bean>
 	
+	<beans:bean class="kr.co.in.SampleIn" id="sampleIn"></beans:bean>
+	<beans:bean class="kr.co.in.TestIn" id="testIn"></beans:bean>
+	<beans:bean class="kr.co.in.LoginIn" id="loginIn"></beans:bean>
+	<beans:bean class="kr.co.in.AuthIn" id="authIn"></beans:bean>
+	<beans:bean class="kr.co.in.AutoLoginIn" id="autologinIn"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/user/login"/>
+			<exclude-mapping path="/user/logout"/>
+			<beans:ref bean="autologinIn"/>
+		</interceptor>
+	
+		<interceptor>
+			<mapping path="/board/create"/>
+			<beans:ref bean="authIn"/>
+		</interceptor>
+	
+		<interceptor>
+			<mapping path="/user/loginpost"/>
+			<beans:ref bean="loginIn"/>
+		</interceptor>
+	
+		<interceptor>
+			<mapping path="/a"/>
+			<mapping path="/b"/>
+			<beans:ref bean="sampleIn"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/c"/>
+			<mapping path="/d"/>
+			<beans:ref bean="testIn"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.user">
+	<select id="login" resultType="kr.co.domain.UserVO">
+		select id, pw, name from tbl_user55 where id=#{id} and pw = #{pw}
+	</select>
+	
+	<update id="updateJsidNvalidtime">
+		update tbl_user55 set jsid=#{jsid}, validtime=#{validtime} where id = #{id}
+	</update>
+	
+	<select id="autoselect" resultType="kr.co.domain.UserVO">
+		select * from tbl_user55 where jsid = #{jsid}
+	</select>
+</mapper>

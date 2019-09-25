@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group">
 					<label for="writer">작성자</label>
-					<input id="writer" name="writer" class="form-control">
+					<input readonly value="${login.id}" id="writer" name="writer" class="form-control">
 				</div>
 				<div class="form-group">
 					<label for="content">내용</label>

@@ -22,9 +22,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			
 			<h1>글 자세히 보기</h1>
-			
 				<form action="">
 					<input type="hidden" name="bno" value="${vo.bno}">
 					<input type="hidden" name="curPage" value="${to.curPage}">
@@ -64,8 +62,12 @@
 				
 				<div class="form-group">
 					<button id="reply_form" class="btn btn-primary">댓글</button>
-					<button class="btn btn-warning modify">수정</button>
-					<button class="btn btn-danger del">삭제</button>
+					
+					<c:if test="${login.id eq vo.writer}">
+						<button class="btn btn-warning modify">수정</button>
+						<button class="btn btn-danger del">삭제</button>
+					</c:if>
+					
 					<button class="btn btn-info list">목록</button>
 				</div>
 		</div>
